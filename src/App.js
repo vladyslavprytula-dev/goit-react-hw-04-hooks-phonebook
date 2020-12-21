@@ -5,6 +5,7 @@ import Filter from './Components/Filter/Filter';
 import { v4 as uuidv4 } from 'uuid';
 import Section from './Components/Section/Section';
 import styles from './styles/main.module.css';
+
 export default function App() {
   const [contacts, setContacts] = useState(
     JSON.parse(window.localStorage.getItem('contacts')) ?? '',
@@ -14,14 +15,14 @@ export default function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
   const addContact = (name, phone) => {
-    const Contact = {
-      id: uuidv4(),
-      name,
-      phone,
-    };
     if (contacts.some(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
     } else {
+      const Contact = {
+        id: uuidv4(),
+        name,
+        phone,
+      };
       setContacts(prevState => [...prevState, Contact]);
     }
   };
